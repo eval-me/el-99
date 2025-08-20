@@ -39,12 +39,8 @@
   (equal (reverse lst) lst))
 
 ;; 07 - Flatten a nested list structure!
-(defun my-flatten(lst)
-  (cond ((listp lst) (cons (car lst) (cdr lst) ))))
-
 (defun my-flatten (lst)
-  (cond ((listq (car lst)) (cons (my-flatten (car lst)) (cdr lst)))
-	((cons (car lst) (cdr lst)))))
-
-(my-flatten '((1 2 3) 2 3))
-
+  (cond ((eq lst nil) nil)
+	((listp (car lst))
+	 (append (my-flatten (car lst)) (my-flatten (cdr lst))))
+	(t (cons (car lst) (my-flatten (cdr lst))))))	    
