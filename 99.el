@@ -44,3 +44,12 @@
 	((listp (car lst))
 	 (append (my-flatten (car lst)) (my-flatten (cdr lst))))
 	(t (cons (car lst) (my-flatten (cdr lst))))))	    
+
+;; 08 - Compress a list structure!
+(defun my-compress (lst)
+  (cond ((eq (car (cdr lst)) nil) lst)
+	((= (car lst) (car (cdr lst))) (my-compress (cdr lst)))
+	(t (cons (car lst) (my-compress (cdr lst))))))
+
+
+
