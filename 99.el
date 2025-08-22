@@ -60,3 +60,13 @@
 	   (cons (car lst) (my-pack (cdr lst)))))
 	((eq (car lst) (car (cdr lst)))
 	 (my-pack (cons (list (car lst)) (cdr lst))))))
+
+;; 10 - Run-length encoding of a list!
+(defun my-encode (lst)
+  (cond ((= (length lst) 1) (list (cons 1 (car lst))))
+	((listp (car lst))
+	 (if (eq (cdr (car lst)) (car (cdr lst)))
+	     (my-encode (cons (cons (+ (car (car lst)) 1) (cdr (car lst))) (cdr (cdr lst))))
+	   (cons (car lst) (my-encode (cdr lst)))))
+	((eq (car lst) (car (cdr lst)))
+	 (my-encode (cons (cons 1 (car lst)) (cdr lst))))))
