@@ -51,5 +51,12 @@
 	((= (car lst) (car (cdr lst))) (my-compress (cdr lst)))
 	(t (cons (car lst) (my-compress (cdr lst))))))
 
-
-
+;; 09 - Pack a list structure!
+(defun my-pack (lst)
+  (cond ((eq (car (cdr lst)) nil) lst)
+	((listp (car lst))
+	 (if (eq (car (car lst)) (car (cdr lst)))
+	     (my-pack (cons (append (car lst) (list (car (cdr lst)))) (cdr (cdr lst))))
+	   (cons (car lst) (my-pack (cdr lst)))))
+	((eq (car lst) (car (cdr lst)))
+	 (my-pack (cons (list (car lst)) (cdr lst))))))
